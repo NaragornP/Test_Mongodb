@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp" lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
+        <script src="app.js"></script>
+        <script src="service.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+          <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    </head>
+    <body ng-controller="AppCtrl" bgcolor="#3e94ec">
+    <center>
+        <div class="container">
+            <h2 class="fontTitle">{{persons.length}} Contacts</h2>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="Name" class="fontTitle">Name</label>
+                    <input type="text" class="form-control" id="Name" ng-model="inputContact" required>
+                </div>
+                <div class="form-group">
+                    <label for="TeleponeNumber" class="fontTitle">Tel</label>
+                    <input type="tel" class="form-control" id="TeleponeNumber" ng-model="inputTel" required>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="addPerson(inputContact,inputTel)"> Add+</button>
+                <span class="add-on"><i class="glyphicon glyphicon-search"></i></span>
+                <input type="text" class="form-control"  placeholder="Search" ng-model="search">
+            </form>
+            </center>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><center>#</center></th>
+                        <th>Name</th>
+                        <th>Tel</th>
+                        <th><center>Edit</center></th>
+                        <th><center>Remove</center></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="person in persons | filter : search">
+                        <td class="col-sm-1" align="center">{{$index+1}}</td>
+                        <td><input type="text" ng-model="person.name" style="border: none"></td>
+                        <td><input type="text" ng-model="person.tel" style="border: none"></td>
+
+                        <td class="col-sm-1" align="center">
+                            <button type="button" class="btn btn-info" ng-click="edit(person)">Save</button>
+                        </td>
+                        <td class="col-sm-1" align="center">
+                            <button type="button" class="btn btn-danger" ng-click="delete(person._id)"><i class="glyphicon glyphicon-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </body>
+</html>
